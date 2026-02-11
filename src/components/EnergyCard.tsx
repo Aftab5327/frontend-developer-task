@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const EnergyCard: React.FC = () => {
+interface EnergyCardProps {
+  className?: string;
+}
+
+const EnergyCard: React.FC<EnergyCardProps> = ({ className }) => {
+  const cardClassName = ['card', 'card-energy', className].filter(Boolean).join(' ');
+
   const option = {
     tooltip: { show: false },
     grid: { left: 10, right: 10, top: 20, bottom: 24 },
@@ -30,7 +36,7 @@ const EnergyCard: React.FC = () => {
   };
 
   return (
-    <div className="card card-energy">
+    <div className={cardClassName}>
       <header className="card-header">
         <div className="card-header-left">
           <img
@@ -52,5 +58,4 @@ const EnergyCard: React.FC = () => {
 };
 
 export default EnergyCard;
-
 

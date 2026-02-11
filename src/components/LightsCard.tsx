@@ -1,8 +1,14 @@
 import React from 'react';
 
-const LightsCard: React.FC = () => {
+interface LightsCardProps {
+  className?: string;
+}
+
+const LightsCard: React.FC<LightsCardProps> = ({ className }) => {
+  const cardClassName = ['card', className].filter(Boolean).join(' ');
+
   return (
-    <div className="card">
+    <div className={cardClassName}>
       <header className="card-header">
         <div className="card-header-left">
           <img

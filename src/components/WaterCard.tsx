@@ -1,8 +1,14 @@
 import React from 'react';
 
-const WaterCard: React.FC = () => {
+interface WaterCardProps {
+  className?: string;
+}
+
+const WaterCard: React.FC<WaterCardProps> = ({ className }) => {
+  const cardClassName = ['card', 'card-water', className].filter(Boolean).join(' ');
+
   return (
-    <div className="card card-water">
+    <div className={cardClassName}>
       <header className="card-header">
         <div className="card-header-left">
           <img
@@ -18,13 +24,11 @@ const WaterCard: React.FC = () => {
       </header>
       <div className="water-main">
         <div className="water-icon" />
-        <div className="water-value">8.42m³</div>
+        <div className="water-value">8.42 m3</div>
       </div>
       <footer className="water-footer">
-        <span className="trend-icon">↓</span>
-        <span className="trend-text">
-          1.2m³ less water used compared to last Tuesday
-        </span>
+        <span className="trend-icon">v</span>
+        <span className="trend-text">1.2 m3 less water used compared to last Tuesday</span>
       </footer>
     </div>
   );

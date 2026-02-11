@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const CarbonCard: React.FC = () => {
+interface CarbonCardProps {
+  className?: string;
+}
+
+const CarbonCard: React.FC<CarbonCardProps> = ({ className }) => {
+  const cardClassName = ['card', 'card-carbon', className].filter(Boolean).join(' ');
+
   const option = {
     tooltip: {
       trigger: 'item',
@@ -39,7 +45,7 @@ const CarbonCard: React.FC = () => {
   };
 
   return (
-    <div className="card card-carbon">
+    <div className={cardClassName}>
       <header className="card-header">
         <div className="card-header-left">
           <img
@@ -59,7 +65,7 @@ const CarbonCard: React.FC = () => {
         <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
         <div className="carbon-center">
           <div className="carbon-value">95gm</div>
-          <div className="carbon-sub">CO₂/kWh</div>
+          <div className="carbon-sub">CO2/kWh</div>
         </div>
       </div>
     </div>

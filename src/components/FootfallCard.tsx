@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const FootfallCard: React.FC = () => {
+interface FootfallCardProps {
+  className?: string;
+}
+
+const FootfallCard: React.FC<FootfallCardProps> = ({ className }) => {
+  const cardClassName = ['card', 'card-footfall', className].filter(Boolean).join(' ');
+
   const option = {
     tooltip: { show: false },
     grid: { left: 28, right: 12, top: 10, bottom: 28 },
@@ -47,7 +53,7 @@ const FootfallCard: React.FC = () => {
   };
 
   return (
-    <div className="card card-footfall">
+    <div className={cardClassName}>
       <header className="card-header">
         <div className="card-header-left">
           <img
@@ -69,5 +75,4 @@ const FootfallCard: React.FC = () => {
 };
 
 export default FootfallCard;
-
 

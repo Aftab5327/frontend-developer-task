@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './style.css';
 import LightsCard from './components/LightsCard';
 import WaterCard from './components/WaterCard';
 import CarbonCard from './components/CarbonCard';
 import EnergyCard from './components/EnergyCard';
 import FootfallCard from './components/FootfallCard';
+import { toggleCardVisibility } from './store/dashboardSlice';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+
+type Section = 'home' | 'analyse' | 'control';
+type CardId = 'lights' | 'water' | 'carbon' | 'energy' | 'footfall';
+
+interface CardDefinition {
+  id: CardId;
+  label: string;
+  render: () => React.ReactElement;
+}
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<'home' | 'analyse' | 'control'>('home');
+  const dispatch = useAppDispatch();
+  const visibility = useAppSelector((state) => state.dashboard.cardVisibility);
+  const [activeSection, setActiveSection] = useState<Section>('home');
+
+  const cards: CardDefinition[] = useMemo(
+    () => [
+      { id: 'lights', label: 'Lights', render: () => <LightsCard /> },
+      { id: 'water', label: 'Water', render: () => <WaterCard /> },
+      { id: 'carbon', label: 'Carbon', render: () => <CarbonCard /> },
+      { id: 'energy', label: 'Energy', render: () => <EnergyCard /> },
+      { id: 'footfall', label: 'Footfall', render: () => <FootfallCard /> },
+    ],
+    [],
+  );
+
+  const visibleCards = cards.filter((card) => visibility[card.id]);
 
   return (
     <div className="app-root">
@@ -70,13 +96,23 @@ const App: React.FC = () => {
         <main className="dashboard">
           {activeSection === 'home' && (
             <>
-              <section className="grid grid-six">
-                <LightsCard />
-                <WaterCard />
-                <CarbonCard />
-                <EnergyCard />
-                <FootfallCard />
-                <div className="grid-empty" aria-hidden="true" />
+              <section className="card-controls" aria-label="Card visibility controls">
+                {cards.map((card) => (
+                  <label key={card.id} className="card-toggle">
+                    <input
+                      type="checkbox"
+                      checked={visibility[card.id]}
+                      onChange={() => dispatch(toggleCardVisibility(card.id))}
+                    />
+                    <span>{card.label}</span>
+                  </label>
+                ))}
+              </section>
+
+              <section className="grid card-grid">
+                {visibleCards.map((card) => (
+                  <React.Fragment key={card.id}>{card.render()}</React.Fragment>
+                ))}
               </section>
             </>
           )}
