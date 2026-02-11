@@ -1,50 +1,63 @@
 # DigiSpace Dashboard – Frontend Developer Task
 
 This project is an implementation of the DigiSpace analytics dashboard based on the provided static design.
-The goal is to achieve a close-to-pixel-perfect layout at a fixed desktop resolution using React and TypeScript.
 
-## Resolution
+The objective was to build a pixel-perfect desktop dashboard using React and TypeScript while maintaining component modularity and clean architecture.
 
-- **Target design resolution**: **1440 × 810** (desktop, non‑responsive)
-- The dashboard scales down slightly on smaller viewports while preserving the aspect ratio but is optimised for the above size.
+---
 
-## Tech Stack
+## 📐 Resolution
 
-- **Framework**: React 19 + TypeScript
-- **Bundler/Dev server**: Vite
-- **Charts**: Apache ECharts via `echarts-for-react`
-- **Styling**: Hand‑crafted CSS (no utility framework)
+- **Target design resolution:** 1440 × 810 (Desktop)
+- The page is intentionally non-responsive as per instructions.
+- Layout is optimized specifically for the above resolution.
 
-## Project Structure
+---
 
-- `src/App.tsx` – Main layout (sidebar, top header, and card grid)
-- `src/components/LightsCard.tsx` – Lights dial card
-- `src/components/WaterCard.tsx` – Water consumption card
-- `src/components/CarbonCard.tsx` – Carbon intensity donut chart
-- `src/components/EnergyCard.tsx` – Energy consumption bar chart
-- `src/components/FootfallCard.tsx` – Footfall line chart
-- `src/style.css` – Global styles and detailed layout for the dashboard
+## 🚀 Tech Stack
 
-## Running the Project
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **Apache ECharts (echarts-for-react)**
+- **Redux Toolkit** (State management)
+- **Custom CSS (Pixel-focused styling)**
 
-```bash
-npm install
-npm run dev
-```
+---
 
-Then open the URL printed in the terminal (usually `http://localhost:5173`) in a desktop browser.
+## 🧩 Architecture & Implementation
 
-## Build for Production
+- Each dashboard card (Lights, Water, Carbon, Energy, Footfall) is implemented as an **independent reusable component**.
+- Charts are rendered using **Apache ECharts**.
+- Global state management handled via **Redux Toolkit**.
+- Strict TypeScript typing applied for components and state.
+- Clean and modular folder structure.
 
-```bash
-npm run build
-npm run preview
-```
+---
 
-## Design Notes
+## ✨ Extra Credit Implementation
 
-- Fonts, colours, paddings, and radii are tuned to closely match the provided design.
-- The dashboard is intentionally fixed to a desktop layout; responsiveness is not the primary goal for this task.
-- Charts are configured with custom colours and labels to mirror the visual style of the original mock.
+### ✅ Adaptive Layout
+The dashboard layout automatically reorganizes based on the number of rendered cards.
+If cards are removed from the state, the grid adjusts dynamically without leaving empty spaces.
+This is implemented using CSS Grid.
 
+### ✅ TypeScript
+All components and state logic are strictly typed.
+
+### ✅ State Management
+Redux Toolkit is used to manage dashboard state.
+
+### ✅ Tests
+Basic unit tests implemented using Jest and React Testing Library.
+
+### ✅ Hosted Application
+The application is deployed on Vercel.
+
+Live Demo:
+https://frontend-developer-task-cyan.vercel.app/
+
+---
+
+## 📂 Project Structure
 
